@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ce3ea68b-1a7d-48ae-a062-5a7b6830c57e" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_config" doc:name="HTTP Request config" doc:id="b5f3386c-68a9-47a8-a36d-37066e2cbc28" >
+		<http:request-connection host="www.microsoft.com" port="200" />
+	</http:request-config>
+	<flow name="errorhandlingFlow" doc:id="2ddaeb18-dc29-40fe-97f2-bd2491b98e5d" >
+		<http:listener doc:name="Listener" doc:id="a4976963-0004-4578-bcbb-05a46f41b2ea" config-ref="HTTP_Listener_config" path="/error">
+		</http:listener>
+		<http:request doc:name="Request" doc:id="8551369d-f125-48a4-98aa-4be41939175a" config-ref="HTTP_Request_config" path="/fake"/>
+		<error-handler>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="3ad21539-d26c-4389-bf24-19f3fca61600" type="HTTP:BAD_GATEWAY">
+				<set-payload value='#["LOL HO GAYA"]' doc:name="Set Payload" doc:id="91aa87b2-b138-4ee4-819b-f557ca847543" />
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>
