@@ -15,6 +15,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<http:listener doc:name="Listener" doc:id="a4976963-0004-4578-bcbb-05a46f41b2ea" config-ref="HTTP_Listener_config" path="/error">
 		</http:listener>
 		<http:request doc:name="Request" doc:id="8551369d-f125-48a4-98aa-4be41939175a" config-ref="HTTP_Request_config" path="/fake"/>
+		<logger level="INFO" doc:name="Logger" doc:id="f8ba4a48-f444-4594-9e4b-db6129fa5ff1" message='"Hi there!"'/>
 		<error-handler>
 			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="3ad21539-d26c-4389-bf24-19f3fca61600" type="HTTP:BAD_GATEWAY">
 				<set-payload value='#["LOL HO GAYA"]' doc:name="Set Payload" doc:id="91aa87b2-b138-4ee4-819b-f557ca847543" />
